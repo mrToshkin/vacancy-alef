@@ -1,0 +1,30 @@
+.header {
+  position: relative;
+  overflow: hidden;
+
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  padding-top: 40px;
+  padding-bottom: 66px;
+
+  color: $white;
+
+  &__nav{
+    flex: 0 1 100%;
+    align-self: baseline;
+  }
+
+  &__article {
+    margin-top: 50px;
+
+    @media (max-width: $mobile) {
+      margin-top: 14px;
+    }
+
+    h1 {
+      font-size: 38px;
+      font-weight: bold;
+    }
+  }
+}

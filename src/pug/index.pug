@@ -1,0 +1,22 @@
+extends layout/main
+
+block variables
+  - var title = "Vacancy Alef"
+
+block header
+  header.header.main-page__header-background
+    nav.header__nav
+      include ../components/!nav/nav
+    .container
+      .header__article
+        article
+          h1 Найдено <span id="cats-amount"></span> котов
+
+block content
+  include ../components/result/result
+  include ../components/subscribe-block/subscribe-block
+
+block template
+  include ../components/result/__card
+
+block script

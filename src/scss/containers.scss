@@ -1,0 +1,16 @@
+.container {
+  width: 100%;
+  max-width: $desktope;
+  margin: 0 auto;
+  padding: 0 50px;
+
+  @media (max-width: $mobile) {
+    max-width: $mobile;
+    padding: 0 20px;
+  }
+}
+
+.grid { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: 20px; }
+.gc-12 { grid-column: 1/13; }
+.gc-10 { grid-column: 1/13; @media (min-width: $tablet) { grid-column: 2/12; } }
+.gc-8 { grid-column: 1/13; @media (min-width: $tablet) { grid-column: 3/11; } }

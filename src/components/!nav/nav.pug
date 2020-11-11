@@ -1,0 +1,14 @@
+.container
+  .nav
+    .nav__logo
+      a(href="index.html").nav__logo-link
+        picture
+          img(class="icon-logo" src="img/svg/logo.svg" alt="logo")
+    .nav__menu
+      include ../!menu/menu
+    .nav__phone
+      a(href="tel:+544349000000").nav__phone-link +544 3490 00000
+      p.nav__phone-title Звони скорее!
+    button.nav__burger.burger(type="button" tabindex="2" aria-expanded="false" aria-controls="menu")
+      span.burger__elements
+      span.visually-hidden Open menu

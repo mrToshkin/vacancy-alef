@@ -1,0 +1,36 @@
+// Colors
+$black: #000000;
+$white: #ffffff;
+$dark-grey: #1F2021;
+$light-grey: #F3F3F3;
+$color-main: #6EBBD3;
+$color-sale: #E62D2D;
+$bgc-header: rgba(31, 32, 33, 0.79);
+
+// Breakpoints mobile first
+/* $mobile: 320px;
+$tablet: 768px;
+$desktope: 1400px;
+
+$tablet-1: 767px;
+$desktope-1: 1399px; */
+
+// Breakpoints desktope first
+$mobile: 768px;
+$tablet: 1024px;
+$desktope: 1280px;
+$wide: 1400px;
+
+// DPI
+$retina-dpi: 144dpi;
+$retina-dppx: 1.5dppx;
+
+// Fonts
+$base-font-size: 16px;
+@function rem($size) { @return $size / $base-font-size * 1rem; }
+@mixin font-size($size) {
+  font-size: $size;
+  font-size: rem($size);
+}
+
+$font: "Montserrat", "Arial", "Helvetica", sans-serif;
