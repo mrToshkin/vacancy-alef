@@ -84,11 +84,9 @@ gulp.task('pug:min', () => {
 
 gulp.task('js', () => {
   return gulp.src('./src/js/*.js')
-    .pipe(babel({
-      presets: ['@babel/env']
-    }))
+    .pipe(babel({ presets: ['@babel/env'] }))
     .pipe(concat('script.min.js'))
-    //.pipe(terser())
+    .pipe(terser())
     .pipe(gulp.dest('./build/js'))
     .pipe(browserSync.reload({stream: true}));
 });

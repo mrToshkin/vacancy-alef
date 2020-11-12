@@ -1,7 +1,7 @@
 'use strict';
 
-// mock
-const CATS_AMOUNT = 16,
+// mock---------------------------------------------
+const CATS_AMOUNT = 17,
       MONTH_IN_YEAR = 12,
       data = [];
 
@@ -25,7 +25,7 @@ for (let i = 0; i < CATS_AMOUNT; i++) {
   data.push(mock(i))
 }
 
-// sort
+// sort---------------------------------------------
 const $price = $('.sort__price'),
       $priceDir = $('.sort__price-direction'),
       priceUp = 'sort__price-direction--up',
@@ -52,7 +52,12 @@ $ageDir.on('click', () => {
 })
 
 //---------------------------------------------
+const CARDS_SHOW_AMOUNT = 6;
+let lastIndex = null;
+let addsCount = 2;
 const cardTemplate = document.querySelector('#card').content.querySelector('.card');
+const $perent = $('.result__body');
+const $showButton = document.querySelector('.result__button-show-more');
 
 const prettify = num => num.toString().replace(/(\d{1,3}(?=(?:\d\d\d)+(?!\d)))/g, "$1" + ' ');
 const createCard = cat => {
@@ -69,6 +74,7 @@ const createCard = cat => {
   $card.querySelector('.card__info-color').textContent = cat.color;
   $card.querySelector('#paws').textContent = cat.paws;
   if (cat.favorite) $card.querySelector('.card__button-favorite').classList.add('card__button-favorite--selected');
+  $card.querySelector('.card__button-favorite').addEventListener('click', onFavoriteClick);
   if (cat.soldOut) {
     $card.querySelector('.card__button-buy').textContent = 'Купить';
     $card.querySelector('.card__button-buy').href = '#';
@@ -79,16 +85,79 @@ const createCard = cat => {
   cat.sale
     ? $card.querySelector('.card__sale').textContent = cat.sale
     : $card.querySelector('.card__sale').classList.add('hidden');
+  
 
   return $card
 }
 
 function insertCards(data) {
-  const $perent = $('.result__body');
-
   $perent.empty();
-  for (let cat of data) $perent.append(createCard(cat));
+  data.forEach((cat, i) => {
+    if (i < CARDS_SHOW_AMOUNT) {
+      $perent.append(createCard(cat));
+      lastIndex = i;
+      addsCount = 2;
+    }
+  })
+
+  if (data.length >= CARDS_SHOW_AMOUNT) {
+    $showButton.classList.remove('hidden')
+    $showButton.removeEventListener('click', onShowMoreClick)
+    $showButton.addEventListener('click', onShowMoreClick);
+  } else {
+    $showButton.classList.add('hidden')
+  }
+}
+
+function addCards(data) {
+  let done = false;
+
+  data.forEach((cat, i) => {
+    if (!done && i > lastIndex && i < CARDS_SHOW_AMOUNT * addsCount) {
+      $perent.append(createCard(cat));
+      lastIndex = i;
+    } 
+    if (!done && i === CARDS_SHOW_AMOUNT * addsCount) {
+      addsCount++;
+      done = true;
+    } 
+    if (CARDS_SHOW_AMOUNT * addsCount >= data.length && lastIndex + 1 >= data.length) {
+      $showButton.removeEventListener('click', onShowMoreClick)
+      $showButton.classList.add('hidden')
+    }
+  })
 }
 
 insertCards(data);
 $('#cats-amount').text(data.length);
+
+//button-show-more--------------------------------------------
+function onShowMoreClick() {
+  if (lastIndex + 1 < data.length) {
+    let stay = window.pageYOffset
+    addCards(data);
+    window.scrollTo(window.pageXOffset, stay)
+  } else {
+    $showButton.removeEventListener('click', onShowMoreClick)
+    $showButton.classList.add('hidden')
+  }
+}
+$('#show-more-text').text(CARDS_SHOW_AMOUNT);
+
+//button-favorite---------------------------------------------
+const $notification = $('#notification').contents('.notification');
+
+function onFavoriteClick({currentTarget}) {
+  const selected = 'card__button-favorite--selected'
+
+  $('body').append($notification);
+  $notification.stop().fadeIn(500, () => { $notification.delay(1500).fadeOut(500) })
+
+  if($(this).hasClass(selected)) {
+    currentTarget.classList.remove(selected)
+    $('#notification__text').text('Кот удалён из избранного')
+  } else {
+    currentTarget.classList.add(selected)
+    $('#notification__text').text('Кот добавлен в избранное')
+  }
+}

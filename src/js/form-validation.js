@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(function() {
   let formValidate = function() {
     $('form').each(function() {
       $(this).on('submit', function() {

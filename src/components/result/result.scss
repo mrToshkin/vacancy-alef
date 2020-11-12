@@ -4,6 +4,10 @@
   padding-top: 40px;
   padding-bottom: 40px;
 
+  @media (max-width: $mobile) {
+    padding-bottom: 80px;
+  }
+
   &__sort {
     display: flex;
     flex-wrap: wrap;
@@ -44,6 +48,30 @@
   }
 
   &__button {
+    &-show-more {
+      height: 65px;
+      width: 100%;
+      max-width: 380px;
+      margin-top: 68px;
+
+      font-size: 14px;
+
+      border: 1px solid $middle-grey;
+      border-radius: 10px;
+
+      background-color: $white;
+      transition: 0.2s;
+
+      &:hover, &:focus {
+        background-color: $light-grey;
+        transition: 0.2s;
+      }
+
+      &--center {
+        display: flex;
+        justify-content: space-around;
+      }
+    }
     &-go-up {
       cursor: pointer;
       position: absolute;

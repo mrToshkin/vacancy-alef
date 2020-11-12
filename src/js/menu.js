@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(function() {
   let $body = document.querySelector('body'),
       burger = document.querySelector('.burger'),
       overlay = document.querySelector('.mobile-menu__overlay'),
