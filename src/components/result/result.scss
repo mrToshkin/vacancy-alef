@@ -167,7 +167,7 @@
 
 .card {
   position: relative;
-  flex: 0 1 30%;
+  flex: 0 1 calc((100% / 3) - 20px);
   margin-top: 23px;
 
   @media (max-width: $tablet) {
